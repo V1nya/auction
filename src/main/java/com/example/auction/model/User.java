@@ -22,6 +22,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<ERole> roles;
 
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Product> productList = new ArrayList<>();
 
     public User(){}
