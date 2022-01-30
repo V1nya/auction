@@ -1,5 +1,9 @@
 package com.example.auction.model;
 
 public enum ERole {
-    Salesman, Customer
+    Salesman, Customer;
+//    @Override
+//    public String getAuthority() {
+//        return name();
+//    }
 }

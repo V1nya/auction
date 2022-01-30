@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="text-center">
+<main class="form-signin">
+    <form class="c" th:action="@{/registrationTo}" method="post">
+
+        <input type="hidden" name="email" th:value="${email}">
+        <h1 class="h3 mb-3 fw-normal">Зареєструватися</h1>
+
+        <div class="form-floating ">
+            <p th:text="'Email: '+${email}"></p>
+        </div>
+        <div class="form-floating ">
+            <input aling="center" type="text" class="form-control" id="floatingCode" name="code"
+                   placeholder="Enter code.">
+            <label for="floatingCode">На вашу пошту відправлено код для піддтвердження.</label>
+            <p>Виберіть чим будете займатись(Продавець/Покупець)</p>
+        </div>
+        <div class="form-floating " th:each="role:${roles}">
+            <label><input  th:type="radio"
+                          th:name="idChecked"
+                          th:value="${role}"
+                          th:text="${role}"
+                          >
+
+
+            </label>
+        </div>
+        <div class="form-floating ">
+            <input aling="center" type="text" class="form-control" id="floatingInput" name="username"
+                   th:value="${username}" placeholder="User Name">
+            <label for="floatingInput">User Name</label>
+        </div>
+
+
+        <div class="form-floating ">
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            <p th:text="${message}"></p>
+            <a href="/login">Я вже маю акаунт</a>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary " type="submit" value="Sign In">Зареєструватися</button>
+    </form>
+</main>
+
+</body>
+<style>
+a{
+            text-decoration:none;
+        }
+        form {
+            margin: 0 auto;
+            width:250px;
+        }
+
+      .c{
+          width: 30%;
+
+      }
+
+
+</style>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="text-center">
+<main class="form-signin">
+  <form class="c"  th:action="@{/login}" method="post">
+    <h1 class="h3 mb-3 fw-normal">Ввійти</h1>
+    <div th:if="${param.error}">
+      Invalid username or password.
+    </div>
+    <div th:if="${param.logout}">
+      You have been logged out.
+    </div>
+
+    <div >
+      <p th:text="${message}"></p>
+    </div>
+
+    <div class="form-floating " >
+      <input aling="center" type="text" class="form-control" id="floatingInput" name="name" placeholder="User Name">
+      <label for="floatingInput">User Name</label>
+    </div>
+    <div class="form-floating ">
+      <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <a href="/registration">Зареєструватися</a>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary " type="submit" value="Sign In">Ввійти</button>
+  </form>
+</main>
+</body>
+</html>

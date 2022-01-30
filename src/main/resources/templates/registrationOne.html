@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="text-center">
+<main class="form-signin">
+    <form class="c" th:action="@{/registration}" method="post">
+
+        <h1 class="h3 mb-3 fw-normal">Зареєструватися</h1>
+
+<!--        <div class="form-floating ">-->
+<!--            <input aling="center" type="text" class="form-control" id="floatingInput" name="username"-->
+<!--                   placeholder="User Name">-->
+<!--            <label for="floatingInput">User Name</label>-->
+<!--        </div>-->
+
+        <div class="form-floating ">
+            <input aling="center" type="email" class="form-control" id="floatinInput" name="email"
+                   placeholder="Email">
+            <label for="floatinInput">Email</label>
+        </div>
+
+<!--        <div class="form-floating ">-->
+<!--            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">-->
+<!--            <label for="floatingPassword">Password</label>-->
+<!--        </div>-->
+
+        <div class="checkbox mb-3">
+            <p th:text="${message}"></p>
+            <a href="/login">Я вже маю акаунт</a>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary " type="submit" value="Sign In">Зареєструватися</button>
+    </form>
+</main>
+
+</body>
+<style>
+a{
+            text-decoration:none;
+        }
+        form {
+            margin: 0 auto;
+            width:250px;
+        }
+
+      .c{
+          width: 30%;
+
+      }
+
+</style>
+</html>
