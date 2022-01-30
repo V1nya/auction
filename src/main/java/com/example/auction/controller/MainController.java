@@ -16,8 +16,7 @@ public class MainController {
     public String getMail() {
 
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("olgaturchak14@gmail.com");
-//        msg.setFrom("kyrylopysanka@gmail.com");
+        msg.setTo("kyrylopysanka@gmail.com");
         msg.setSubject("Тest");
         msg.setText("Test");
         mailSender.send(msg);
