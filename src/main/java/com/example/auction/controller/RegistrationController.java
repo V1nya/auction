@@ -24,6 +24,11 @@ public class RegistrationController {
     @Autowired
     private MailSender mailSender;
 
+//    @GetMapping("/login")
+//    public String login(Module module){
+//        return "login";
+//    }
+
     @GetMapping("/registration")
     public String reg() {
 
@@ -44,8 +49,7 @@ public class RegistrationController {
             msg.setTo(email);
             msg.setSubject("Код для підтвердження");
             msg.setText("Ваш код:" + email.length() * 2094);
-
-//            mailSender.send(msg);
+            mailSender.send(msg);
             return "registrationTo";
         }
 
@@ -66,7 +70,7 @@ public class RegistrationController {
             msg.setTo(email);
             msg.setSubject("Код для підтвердження");
             msg.setText("Ваш код:" + email.length() * 2094);
-//            mailSender.send(msg);
+            mailSender.send(msg);
             return "registrationTo";
 
         } else {
@@ -81,8 +85,10 @@ public class RegistrationController {
             }
             user.setPassword(password);
             user.setCount(0);
+            userRepository.save(user);
             model.addAttribute("message", "Ви успішно зареєструвалися");
-            return "login";
+
+            return "redirect:/login";
         }
 
     }

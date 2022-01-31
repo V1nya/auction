@@ -22,4 +22,9 @@ public class MainController {
         mailSender.send(msg);
         return "main";
     }
+    @GetMapping("/get")
+    public String get (){
+        return "get";
+    }
+
 }
