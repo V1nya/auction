@@ -19,7 +19,7 @@ public class MainController {
         msg.setTo("kyrylopysanka@gmail.com");
         msg.setSubject("Тest");
         msg.setText("Test");
-        mailSender.send(msg);
+//        mailSender.send(msg);
         return "main";
     }
     @GetMapping("/get")

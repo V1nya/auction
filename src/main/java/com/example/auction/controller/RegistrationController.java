@@ -56,7 +56,9 @@ public class RegistrationController {
     }
 
     @PostMapping("/registrationTo")
-    public String regUser(String username, String password, String code,
+    public String regUser(String username,
+                          String password,
+                          String code,
                           String email,
                           Model model,
                           @RequestParam(value = "idChecked", required = false) List<String> role) {
