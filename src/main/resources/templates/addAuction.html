@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 </head>
 <body>
 
 <h1>Створення аукціона</h1>
 <form th:action="@{/addAuction}" enctype="multipart/form-data" method="post">
-    <input type="text" name="title" placeholder="Введіть назву" class="form-control"><br>
-    <textarea type="text" name="full_text" placeholder="Введіть опис" class="form-control"></textarea><br>
-        <input type="number" name="count" placeholder="Початкова ціна" class="form-control"><br>
-        <input type="date" name="timeStart" placeholder="Дата почтку" class="form-control"><br>
-        <input type="date" name="timeEnd" placeholder="Дата закінчення" class="form-control"><br>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <h2 class="input-group-text" id="inputGroupFileAddon0">Додайте фото</h2>
-            </div>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile0" name="fileImg"
-                       aria-describedby="inputGroupFileAddon01">
-            </div>
-        </div>
+  <input type="text" name="title" placeholder="Введіть назву" class="form-control"><br>
+  <textarea type="text" name="full_text" placeholder="Введіть опис" class="form-control"></textarea><br>
+  <input type="number" name="count" placeholder="Початкова ціна" class="form-control"><br>
+  <input type="date" name="timeStart" placeholder="Дата почтку" class="form-control"><br>
+  <input type="date" name="timeEnd" placeholder="Дата закінчення" class="form-control"><br>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <h2 class="input-group-text" id="inputGroupFileAddon0">Додайте фото</h2>
+    </div>
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" id="inputGroupFile0" name="fileImg"
+             aria-describedby="inputGroupFileAddon01">
+    </div>
+  </div>
 
-    <button type="submit" class="btn btn-success">Створити аукціон</button>
+  <button type="submit" class="btn btn-success">Створити аукціон</button>
 </body>
 </html>

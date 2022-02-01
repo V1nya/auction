@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Редагування аукціона</h1>
+<form th:action="@{/editAuction}" enctype="multipart/form-data" method="post">
+    <div th:if="${product.getNameImg!=null}">
+        <img width="200" height="350" th:src="'images/'+${product.getNameImg}">
+    </div>
+    <input type="hidden" name="id" th:value="${product.getId}">
+    <input type="text" name="title" placeholder="Введіть назву" th:value="${product.getName}" class="form-control"><br>
+    <textarea type="text" name="full_text" placeholder="Введіть опис"  th:text="${product.getDescription}"
+              class="form-control"> </textarea><br>
+    <input type="number" name="count" placeholder="Початкова ціна" th:value="${product.getPrice}"
+           class="form-control"><br>
+    <input type="date" name="timeStart" placeholder="Дата почтку" th:value="${product.getStartAuctionStr}"
+           class="form-control"><br>
+    <input type="date" name="timeEnd" placeholder="Дата закінчення" th:value="${product.getEndAuctionStr}"
+           class="form-control"><br>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <h2 class="input-group-text" id="inputGroupFileAddon0">Додайте фото</h2>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile0" name="fileImg"
+                   aria-describedby="inputGroupFileAddon01">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success"> Змінити</button>
+</form>
+
+</body>
+</html>

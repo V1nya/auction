@@ -55,8 +55,12 @@ public class SalesmanController {
         Product product = new Product(title,
                 full_text,
                 count,
-                new Date(Integer.parseInt(timeStart.substring(0,4)),Integer.parseInt(timeStart.substring(5,7)),Integer.parseInt(timeStart.substring(8,10))),
-                new Date(Integer.parseInt(timeEnd.substring(0,4)),Integer.parseInt(timeEnd.substring(5,7)),Integer.parseInt(timeEnd.substring(8,10))),
+                new Date(Integer.parseInt(timeStart.substring(0, 4)),
+                        Integer.parseInt(timeStart.substring(5, 7)),
+                        Integer.parseInt(timeStart.substring(8, 10))),
+                new Date(Integer.parseInt(timeEnd.substring(0, 4)),
+                        Integer.parseInt(timeEnd.substring(5, 7)),
+                        Integer.parseInt(timeEnd.substring(8, 10))),
                 user,
                 "");
 

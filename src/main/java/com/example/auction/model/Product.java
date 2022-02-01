@@ -91,6 +91,30 @@ public class Product {
         this.price = price;
     }
 
+    public  String getStartAuctionStr(){
+
+        String ret="";
+        if (startAuction.getMonth()<10){
+            ret+=startAuction.getYear()+"-"+"0"+startAuction.getMonth();
+        }
+        if (startAuction.getDay()<10){
+            ret+="-"+"0"+startAuction.getDay();
+        }
+
+        return ret;
+    }
+    public  String getEndAuctionStr(){
+        String ret="";
+        if (endAuction.getMonth()<10){
+            ret+=endAuction.getYear()+"-"+"0"+endAuction.getMonth();
+        }
+        if (endAuction.getDay()<10){
+            ret+="-"+"0"+endAuction.getDay();
+        }
+
+        return ret;
+    }
+
     public Date getStartAuction() {
         return startAuction;
     }
