@@ -1,6 +1,10 @@
 package com.example.auction.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -18,45 +22,48 @@ public class Product {
     private String nameImg;
 
     @OneToOne(cascade = CascadeType.ALL,
-            orphanRemoval = true,fetch = FetchType.EAGER)
-    private User userSalesman;
-
-    @OneToOne(cascade = CascadeType.ALL,
-            orphanRemoval = true,fetch = FetchType.EAGER)
+            orphanRemoval = true, fetch = FetchType.EAGER)
     private User userBuy;
 
-    public  Product(){}
+    public Product() {
+    }
 
     public Product(String name,
                    String description,
                    double price,
                    Date startAuction,
                    Date endAuction,
-                   User userSalesman,
                    String nameImg) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.startAuction = startAuction;
         this.endAuction = endAuction;
-        this.userSalesman = userSalesman;
-        this.nameImg=nameImg;
-    }
+        this.nameImg = nameImg;
 
-    public String getNameImg() {
+    }
+    public Product(String name,
+                   String description,
+                   double price,
+                   String startAuction,
+                   String  endAuction,
+                   String nameImg) throws ParseException {
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.startAuction = formatDate.parse(startAuction);
+        this.endAuction = formatDate.parse(endAuction);
+        this.nameImg = nameImg;
+
+
+    }
+        public String getNameImg() {
         return nameImg;
     }
 
     public void setNameImg(String nameImg) {
         this.nameImg = nameImg;
-    }
-
-    public User getUserSalesman() {
-        return userSalesman;
-    }
-
-    public void setUserSalesman(User userSalesman) {
-        this.userSalesman = userSalesman;
     }
 
     public User getUserBuy() {
@@ -91,28 +98,18 @@ public class Product {
         this.price = price;
     }
 
-    public  String getStartAuctionStr(){
+    public String getStartAuctionStr() throws ParseException {
 
-        String ret="";
-        if (startAuction.getMonth()<10){
-            ret+=startAuction.getYear()+"-"+"0"+startAuction.getMonth();
-        }
-        if (startAuction.getDay()<10){
-            ret+="-"+"0"+startAuction.getDay();
-        }
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 
-        return ret;
+
+        return formatDate.format(startAuction);
     }
-    public  String getEndAuctionStr(){
-        String ret="";
-        if (endAuction.getMonth()<10){
-            ret+=endAuction.getYear()+"-"+"0"+endAuction.getMonth();
-        }
-        if (endAuction.getDay()<10){
-            ret+="-"+"0"+endAuction.getDay();
-        }
 
-        return ret;
+    public String getEndAuctionStr() {
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        return formatDate.format(endAuction);
+
     }
 
     public Date getStartAuction() {
@@ -122,6 +119,11 @@ public class Product {
     public void setStartAuction(Date startAuction) {
         this.startAuction = startAuction;
     }
+    public void setStartAuction(String startAuction) throws ParseException {
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+
+        this.startAuction = formatDate.parse(startAuction);
+    }
 
     public Date getEndAuction() {
         return endAuction;
@@ -129,6 +131,10 @@ public class Product {
 
     public void setEndAuction(Date endAuction) {
         this.endAuction = endAuction;
+    }
+    public void setEndAuction(String endAuction) throws ParseException {
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        this.endAuction = formatDate.parse(endAuction);
     }
 
     public Long getId() {

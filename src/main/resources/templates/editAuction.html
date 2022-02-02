@@ -32,6 +32,12 @@
     </div>
     <button type="submit" class="btn btn-success"> Змінити</button>
 </form>
+<form th:action="@{/delAuction}" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="id" th:value="${product.getId}">
+    <button type="submit" class="btn btn-success"> Видалити</button>
+</form>
+
+
 
 </body>
 </html>

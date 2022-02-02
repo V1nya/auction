@@ -24,10 +24,7 @@ public class RegistrationController {
     @Autowired
     private MailSender mailSender;
 
-//    @GetMapping("/login")
-//    public String login(Module module){
-//        return "login";
-//    }
+
 
     @GetMapping("/registration")
     public String reg() {
