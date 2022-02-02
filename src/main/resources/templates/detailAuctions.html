@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Деталі аукціона</h1>
+<form th:action="@{/allAuctions}" enctype="multipart/form-data" method="get">
+    <div th:if="${product.getNameImg!=null}">
+        <img width="200" height="350" th:src="'images/'+${product.getNameImg}">
+    </div>
+    <input type="hidden" name="id" th:value="${product.getId}">
+    <h1 type="text" name="title" th:text="${product.getName}" class="form-control"></h1><br>
+    <p  name="full_text" th:text="'Опис: '+${product.getDescription}"
+       class="form-control"></p><br>
+    <p  name="count" th:text="'Ціна: '+${product.getPrice}"
+       class="form-control"></p><br>
+    <div th:if="${leader!=null}">
+    <p  name="count" th:text="'Веде аукціон: '+${leader.getName}"
+        class="form-control"></p><br>
+    </div>
+    <p  name="timeStart" th:text="'Дата початку: '+${product.getStartAuctionStr}"
+       class="form-control"></p><br>
+    <p  name="timeEnd" th:text="'Дата закінчення: '+${product.getEndAuctionStr}"
+       class="form-control"></p><br>
+
+
+    <button type="submit" class="btn btn-success"> Назад</button>
+
+</form>
+<div th:each="price:${prices}">
+    <form th:action="@{/addPriceAuction}" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="id" th:value="${product.getId}">
+        <input type="hidden" name="price" th:value="${price}">
+        <button type="submit" class="btn btn-success" th:text="'Підвищити на:'+${price}"></button>
+    </form>
+</div>
+<form th:action="@{/addPriceAuction}" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="id" th:value="${product.getId}">
+    <input type="number" name="price" >
+    <button type="submit" class="btn btn-success" th:text="@{Підвищити}"> </button>
+</form>
+
+
+
+</body>
+</html>

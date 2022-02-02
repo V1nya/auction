@@ -19,7 +19,7 @@ public class User implements UserDetails {
     private String name;
     private String email;
     private String password;
-    private double count;
+    private double balance;
 
     @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -32,11 +32,11 @@ public class User implements UserDetails {
 
     public User(){}
 
-    public User(String name, String email, String password, double count, Set<ERole> roles) {
+    public User(String name, String email, String password, double balance, Set<ERole> roles) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.count = count;
+        this.balance = balance;
         this.roles = roles;
     }
 
@@ -102,12 +102,13 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public double getCount() {
-        return count;
+
+    public double getBalance() {
+        return balance;
     }
 
-    public void setCount(double count) {
-        this.count = count;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public Set<ERole> getRoles() {

@@ -83,7 +83,7 @@ public class RegistrationController {
                 user.setRoles((Collections.singleton(ERole.Salesman)));
             }
             user.setPassword(password);
-            user.setCount(0);
+            user.setBalance(1000);
             userRepository.save(user);
             model.addAttribute("message", "Ви успішно зареєструвалися");
 

@@ -21,9 +21,11 @@ public class Product {
     private Date endAuction;
     private String nameImg;
 
-    @OneToOne(cascade = CascadeType.ALL,
-            orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User userBuy;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private User leader;
 
     public Product() {
     }
@@ -42,11 +44,12 @@ public class Product {
         this.nameImg = nameImg;
 
     }
+
     public Product(String name,
                    String description,
                    double price,
                    String startAuction,
-                   String  endAuction,
+                   String endAuction,
                    String nameImg) throws ParseException {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         this.name = name;
@@ -58,7 +61,16 @@ public class Product {
 
 
     }
-        public String getNameImg() {
+
+    public User getLeader() {
+        return leader;
+    }
+
+    public void setLeader(User leader) {
+        this.leader = leader;
+    }
+
+    public String getNameImg() {
         return nameImg;
     }
 
@@ -119,10 +131,19 @@ public class Product {
     public void setStartAuction(Date startAuction) {
         this.startAuction = startAuction;
     }
+
     public void setStartAuction(String startAuction) throws ParseException {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 
         this.startAuction = formatDate.parse(startAuction);
+    }
+
+    public boolean isSale() {
+        Date date = new Date();
+        if (endAuction.compareTo(date) == 1 && startAuction.compareTo(date) == -1) {
+            return true;
+        }
+        return false;
     }
 
     public Date getEndAuction() {
@@ -132,6 +153,7 @@ public class Product {
     public void setEndAuction(Date endAuction) {
         this.endAuction = endAuction;
     }
+
     public void setEndAuction(String endAuction) throws ParseException {
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         this.endAuction = formatDate.parse(endAuction);
@@ -144,4 +166,6 @@ public class Product {
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }
