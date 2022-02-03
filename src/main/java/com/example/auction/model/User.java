@@ -20,6 +20,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private double balance;
+    private int refuse = 3;
 
     @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -64,6 +65,8 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
@@ -96,6 +99,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean isBanned(){
+        return refuse ==0?true:false;
+    }
+
+    public int getRefuse() {
+        return refuse;
+    }
+
+    public void minusRefuse() {
+        this.refuse--;
     }
 
     public void setPassword(String password) {
