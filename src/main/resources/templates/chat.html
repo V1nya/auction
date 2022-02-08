@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
@@ -19,6 +19,8 @@
         <div class="title">Chat</div>
     </div>
     <ul id ="messageArea" class="messages">
+        <input type="hidden" name="id_recipient" th:value="${recipient}">
+
 
     </ul>
     <form>

@@ -16,23 +16,53 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Message {
     private String messageContent;
     private String sender;
+    private String recipient;
     private String messageSide;
+    private Date time;
+
+
+
+    public Message(){}
+
+
+    public Message(String messageContent, String sender, String recipient, String messageSide) {
+        this.messageContent = messageContent;
+        this.sender = sender;
+        this.recipient = recipient;
+        this.messageSide = messageSide;
+        this.time = new Date();
+    }
+
+
+    public Date getTime() {
+        return time;
+    }
+    public String getStrTime() throws ParseException {
+        SimpleDateFormat formatDate = new SimpleDateFormat("HH:mm");
+        return formatDate.format(time);
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
     public String getSender() {
         return sender;
     }
 
-    public Message(){}
+    public String getRecipient() {
+        return recipient;
+    }
 
-    public Message(String messageContent, String sender, String messageSide) {
-        this.messageContent = messageContent;
-        this.sender = sender;
-        this.messageSide = messageSide;
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
     }
 
     public void setSender(String sender) {

@@ -4,7 +4,11 @@ var notificationCount = 0;
 
 var Message;
     Message = function (arg) {
-        this.text = arg.text, this.message_side = arg.message_side;
+        this.text = arg.text,
+        this.sender=arg.sender,
+        this.recipient=arg.recipient,
+        this.time=arg.time;
+        this.message_side = arg.message_side;
         this.draw = function (_this) {
             return function () {
                 var $message;
@@ -33,6 +37,13 @@ $(document).ready(function() {
     $("#notifications").click(function() {
         resetNotificationCount();
     });
+
+});
+$(document).keypress(function (e) {
+    if (e.which == 13) {
+     document.getElementById("send-private").click();
+
+    }
 });
 
 function connect() {
@@ -46,7 +57,10 @@ function connect() {
         });
 
         stompClient.subscribe('/user/topic/private-messages', function (message) {
-            showMessage(JSON.parse(message.body).content,JSON.parse(message.body).messageSide);
+            showMessage(JSON.parse(message.body).content,
+            JSON.parse(message.body).messageSide,
+            JSON.parse(message.body).sender,
+            JSON.parse(message.body).time);
         });
 
         stompClient.subscribe('/topic/global-notifications', function (message) {
@@ -61,7 +75,7 @@ function connect() {
     });
 }
 
-function showMessage(mes,messageSide) {
+function showMessage(mes,messageSide,sender,time) {
 var $messages,message
 
             $('.message_input').val('');
@@ -84,7 +98,9 @@ function sendMessage() {
 function sendPrivateMessage() {
     console.log("sending private message");
     stompClient.send("/ws/private-message", {}, JSON.stringify({'messageContent': $("#private-message").val(),
-   'messageSide':'right'}));
+   'messageSide':'right',
+   'recipient': $("#id_recipient").val()
+   }));
 }
 
 function updateNotificationDisplay() {
