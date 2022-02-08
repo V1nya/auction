@@ -1,28 +1,28 @@
 package com.example.auction.Servise;
 
-import com.example.auction.model.Message;
+
+import com.example.auction.model.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MessageService {
-
+public class NotificationService {
     private final SimpMessagingTemplate messagingTemplate;
 
     @Autowired
-    public MessageService(SimpMessagingTemplate messagingTemplate) {
+    public NotificationService(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }
 
     public void sendGlobalNotification() {
-        Message message = new Message("Global Notification");
+        ResponseMessage message = new ResponseMessage("Global Notification");
 
         messagingTemplate.convertAndSend("/topic/global-notifications", message);
     }
 
     public void sendPrivateNotification(final String userId) {
-        Message message = new Message("Private Notification");
+        ResponseMessage message = new ResponseMessage("Private Notification");
 
         messagingTemplate.convertAndSendToUser(userId,"/topic/private-notifications", message);
     }

@@ -1,6 +1,7 @@
 package com.example.auction.Servise;
 
 import com.example.auction.model.Message;
+import com.example.auction.model.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -9,25 +10,25 @@ import org.springframework.stereotype.Service;
 public class WSService {
 
     private final SimpMessagingTemplate messagingTemplate;
-    private final MessageService messageService;
+    private final NotificationService notificationService;
 
     @Autowired
-    public WSService(SimpMessagingTemplate messagingTemplate, MessageService messageService) {
+    public WSService(SimpMessagingTemplate messagingTemplate, NotificationService notificationService) {
         this.messagingTemplate = messagingTemplate;
-        this.messageService = messageService;
+        this.notificationService = notificationService;
     }
 
     public void notifyFrontend(final String message) {
-        Message response = new Message(message);
-        messageService.sendGlobalNotification();
+        ResponseMessage response = new ResponseMessage(message);
+        notificationService.sendGlobalNotification();
 
         messagingTemplate.convertAndSend("/topic/messages", response);
     }
 
-    public void notifyUser(final String id, final String message) {
-        Message response = new Message(message);
+    public void notifyUser(Message message) {
+        ResponseMessage response = new ResponseMessage(message.getMessageContent(), "left");
 
-        messageService.sendPrivateNotification(id);
-        messagingTemplate.convertAndSendToUser(id, "/topic/private-messages", response);
+        notificationService.sendPrivateNotification("Odmin");
+        messagingTemplate.convertAndSendToUser("Odmin", "/topic/private-messages", response);
     }
 }

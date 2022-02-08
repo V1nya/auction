@@ -1,5 +1,6 @@
 package com.example.auction.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -31,6 +32,7 @@ public class User implements UserDetails {
             orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Product> productList = new ArrayList<>();
 
+
     public User(){}
 
     public User(String name, String email, String password, double balance, Set<ERole> roles) {
@@ -40,6 +42,8 @@ public class User implements UserDetails {
         this.balance = balance;
         this.roles = roles;
     }
+
+
 
     public Long getId() {
         return id;

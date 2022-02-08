@@ -1,74 +1,57 @@
 package com.example.auction.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
-@Entity
 public class Message {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String messageContent;
+    private String sender;
+    private String messageSide;
 
-    private String content;
-    private Date time;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private User userGet;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private User userSet;
-
-    public Message() {
+    public String getSender() {
+        return sender;
     }
 
-    public Message(String content){
-        this.content=content;
-    }
-    public Message(String content, User userGet, User userSet) {
-        this.content = content;
-        this.time = new Date();
-        this.userGet = userGet;
-        this.userSet = userSet;
+    public Message(){}
+
+    public Message(String messageContent, String sender, String messageSide) {
+        this.messageContent = messageContent;
+        this.sender = sender;
+        this.messageSide = messageSide;
     }
 
-    public String getContent() {
-        return content;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public String getMessageSide() {
+        return messageSide;
     }
 
-    public Date getTime() {
-        return time;
+    public void setMessageSide(String messageSide) {
+        this.messageSide = messageSide;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public String getMessageContent() {
+        return messageContent;
     }
 
-    public User getUserGet() {
-        return userGet;
-    }
-
-    public void setUserGet(User userGet) {
-        this.userGet = userGet;
-    }
-
-    public User getUserSet() {
-        return userSet;
-    }
-
-    public void setUserSet(User userSet) {
-        this.userSet = userSet;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setMessageContent(String messageContent) {
+        this.messageContent = messageContent;
     }
 }
