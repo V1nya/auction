@@ -9,6 +9,7 @@ var Message;
         this.recipient=arg.recipient,
         this.time=arg.time;
         this.message_side = arg.message_side;
+        this.chat_id = arg.chat_id;
         this.draw = function (_this) {
             return function () {
                 var $message;
@@ -42,7 +43,6 @@ $(document).ready(function() {
 $(document).keypress(function (e) {
     if (e.which == 13) {
      document.getElementById("send-private").click();
-
     }
 });
 
@@ -60,7 +60,8 @@ function connect() {
             showMessage(JSON.parse(message.body).content,
             JSON.parse(message.body).messageSide,
             JSON.parse(message.body).sender,
-            JSON.parse(message.body).time);
+            JSON.parse(message.body).time,
+            JSON.parse(message.body).chat_id);
         });
 
         stompClient.subscribe('/topic/global-notifications', function (message) {
@@ -99,7 +100,8 @@ function sendPrivateMessage() {
     console.log("sending private message");
     stompClient.send("/ws/private-message", {}, JSON.stringify({'messageContent': $("#private-message").val(),
    'messageSide':'right',
-   'recipient': $("#id_recipient").val()
+   'recipient': $("#id_recipient").val(),
+   'chat_id':$("#chat_id").val()
    }));
 }
 

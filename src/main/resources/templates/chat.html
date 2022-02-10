@@ -2,24 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Chat</title>
+    <title>Бесіда</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <script src="js/scripts.js"></script>
-    <link rel="stylesheet" href="css/styleChat.css" />
+    <script src="static/js/scripts.js"></script>
+    <link rel="stylesheet" href="static/css/styleChat.css" />
 </head>
 <body>
-<body background="18.jpg">
+<body th:style="'background-image: url(images/18.jpg);'">
 
 <div class="chat_window">
     <div class="top_menu">
 
-        <div class="title">Chat</div>
+        <div class="title"><p th:text="${recipient}"></p></div>
     </div>
     <ul id ="messageArea" class="messages">
-        <input type="hidden" name="id_recipient" th:value="${recipient}">
+        <input type="hidden" id="id_recipient" th:value="${recipient}">
+        <input name="id_chat" id="chat_id" type="hidden" th:value="${chat_id}">
 
 
     </ul>

@@ -20,17 +20,28 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Entity
 public class Message {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String messageContent;
     private String sender;
     private String recipient;
     private String messageSide;
     private Date time;
+    private String chat_id;
+
 
 
 
     public Message(){}
 
+    public Message(String messageContent, String messageSide) {
+        this.messageContent = messageContent;
+        this.messageSide = messageSide;
+    }
 
     public Message(String messageContent, String sender, String recipient, String messageSide) {
         this.messageContent = messageContent;
@@ -39,8 +50,30 @@ public class Message {
         this.messageSide = messageSide;
         this.time = new Date();
     }
+    public Message(String messageContent, String sender, String recipient, String messageSide,String chat_id) {
+        this.messageContent = messageContent;
+        this.sender = sender;
+        this.recipient = recipient;
+        this.messageSide = messageSide;
+        this.time = new Date();
+        this.chat_id=chat_id;
+    }
 
+    public String getChat_id() {
+        return chat_id;
+    }
 
+    public void setChat_id(String chat_id) {
+        this.chat_id = chat_id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public Date getTime() {
         return time;
     }

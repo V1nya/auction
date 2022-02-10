@@ -1,7 +1,9 @@
 package com.example.auction.controller;
 
+import com.example.auction.model.Chat;
 import com.example.auction.model.ERole;
 import com.example.auction.model.User;
+import com.example.auction.repo.ChatRepository;
 import com.example.auction.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -22,8 +24,11 @@ public class MainController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ChatRepository chatRepository;
 
-    @GetMapping("/")
+
+    @GetMapping("/get")
     public String getMail(Principal principal) {
 //        SimpleMailMessage msg = new SimpleMailMessage();
 //        msg.setTo("kyrylopysanka@gmail.com");
@@ -35,8 +40,22 @@ public class MainController {
 //        userRepository.save(user);
 //         userRepository.delete( userRepository.findByEmail("krotgametv2@gmail.com"));
 
+        Chat chat = new Chat();
+        chat.setUsers(userRepository.findAll());
+        chatRepository.save(chat);
+        var usr =  userRepository.findByName("Odmin2");
+        var usr2 = userRepository.findByName(principal.getName());
+        usr.getChats().add(chat);
+        var c = usr2.getChats();
+        c.add(chat);
+        usr2.setChats(c);
+        userRepository.save(usr2);
+        c = usr.getChats();
+        c.add(chat);
+        userRepository.save(usr);
 
         return "get";
+
     }
 //    @GetMapping("/get")
 //    public String get (Principal principal, Model model){

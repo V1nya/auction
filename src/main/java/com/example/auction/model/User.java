@@ -32,6 +32,9 @@ public class User implements UserDetails {
             orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Product> productList = new ArrayList<>();
 
+    @ManyToMany( cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+    private List<Chat> chat ;
+
 
     public User(){}
 
@@ -70,6 +73,13 @@ public class User implements UserDetails {
     }
 
 
+    public List<Chat> getChats() {
+        return chat;
+    }
+
+    public void setChats(List<Chat> chats) {
+        this.chat = chats;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

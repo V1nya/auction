@@ -31,7 +31,8 @@ public class WSService {
         ResponseMessage response = new ResponseMessage(message.getMessageContent(),
                 "left",
                 message.getSender(),
-                message.getStrTime());
+                message.getStrTime(),
+                message.getChat_id());
 
         notificationService.sendPrivateNotification(message.getRecipient());
         messagingTemplate.convertAndSendToUser(message.getRecipient(), "/topic/private-messages", response);

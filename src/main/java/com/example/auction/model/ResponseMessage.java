@@ -9,6 +9,7 @@ public class ResponseMessage {
     private String sender;
     private String recipient;
     private String time;
+    private String chat_id;
 
 
     public ResponseMessage() {
@@ -23,18 +24,34 @@ public class ResponseMessage {
         this.messageSide = messageSide;
     }
 
-    public ResponseMessage(String content, String messageSide, String sender, String recipient, String time) {
+    public ResponseMessage(String content, String messageSide, String sender, String recipient, String time,String chat_id) {
         this.content = content;
         this.messageSide = messageSide;
         this.sender = sender;
         this.recipient = recipient;
         this.time = time;
+        this.chat_id=chat_id;
     }
     public ResponseMessage(String content, String messageSide, String sender, String time) {
         this.content = content;
         this.messageSide = messageSide;
         this.sender = sender;
         this.time = time;
+    }
+    public ResponseMessage(String content, String messageSide, String sender, String time,String chat_id) {
+        this.content = content;
+        this.messageSide = messageSide;
+        this.sender = sender;
+        this.time = time;
+        this.chat_id=chat_id;
+    }
+
+    public String getChat_id() {
+        return chat_id;
+    }
+
+    public void setChat_id(String chat_id) {
+        this.chat_id = chat_id;
     }
 
     public String getSender() {
