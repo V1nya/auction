@@ -51,14 +51,19 @@ public class ChatController {
     public String chat(@RequestParam("id") Long id, Principal principal, Model model){
 
 //        Only recipients
-        var v =chatRepository.findById(id).get().getUsers().stream()
-                .filter(x->!(x.getName().equals(principal.getName())))
-                .collect(Collectors.toList());
+
             model.addAttribute("recipient",
                     chatRepository.findById(id).get().getUsers().stream()
                             .filter(x->!(x.getName().equals(principal.getName())))
                             .collect(Collectors.toList()).get(0).getName());
             model.addAttribute("chat_id",id);
+            var messages = chatRepository.findById(id).get().getSortMessage();
+            for (var mes :messages){
+                if (!mes.getSender().equals(principal.getName())){
+                    mes.setMessageSide("left");
+                }
+            }
+            model.addAttribute("mess",messages);
 
         return "chat";
     }
@@ -71,6 +76,9 @@ public class ChatController {
         Message newMessage = new Message(message.getMessageContent(),principal.getName(),
                 message.getRecipient(), message.getMessageSide(), message.getChat_id());
         service.notifyUser(newMessage);
+        var chat =  chatRepository.findById(Long.parseLong(message.getChat_id())).get();
+        chat.addMessage(newMessage);
+        chatRepository.save(chat);
         return new ResponseMessage(HtmlUtils.htmlEscape(message.getMessageContent()),
                 HtmlUtils.htmlEscape(message.getMessageSide()),
                 HtmlUtils.htmlEscape(newMessage.getSender()),

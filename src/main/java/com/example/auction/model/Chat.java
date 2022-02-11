@@ -15,7 +15,7 @@ public class Chat {
 
 
     @OneToMany(cascade = CascadeType.ALL,
-            orphanRemoval = true,fetch = FetchType.EAGER)
+            orphanRemoval = true)
     @JoinTable(
             name = "chat_user",
             joinColumns = {@JoinColumn(name = "cht_id")},
@@ -24,7 +24,7 @@ public class Chat {
     private List<User> usersList;
 
     @OneToMany(cascade = CascadeType.ALL,
-            orphanRemoval = true,fetch = FetchType.LAZY)
+            orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Message> messages;
 
 
@@ -81,5 +81,9 @@ public class Chat {
     public List<Message> getSortMessage(){
 
        return messages.stream().sorted(Comparator.comparing(Message::getTime)).collect(Collectors.toList());
+    }
+    public void addMessage(Message message){
+        this.messages.add(message);
+
     }
 }

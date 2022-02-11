@@ -21,6 +21,15 @@
     <ul id ="messageArea" class="messages">
         <input type="hidden" id="id_recipient" th:value="${recipient}">
         <input name="id_chat" id="chat_id" type="hidden" th:value="${chat_id}">
+        <div th:each="message:${mess}">
+        <li th:class="'message '+${message.getMessageSide}+' appeared'">
+            <div class="avatar"></div>
+            <div class="text_wrapper">
+                <div class="text" ><p th:text="${message.getMessageContent}"></p></div>
+            </div>
+        </li>
+        </div>
+
 
 
     </ul>

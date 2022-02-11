@@ -24,7 +24,9 @@ var Message;
         return this;
     };
 $(document).ready(function() {
+
     console.log("Index page is ready");
+    scrollHeight();
     connect();
 
     $("#send").click(function() {
@@ -74,6 +76,11 @@ function connect() {
             updateNotificationDisplay();
         });
     });
+}
+function scrollHeight(){
+var $messages
+            $messages = $('.messages');
+            return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
 }
 
 function showMessage(mes,messageSide,sender,time) {

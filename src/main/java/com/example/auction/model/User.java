@@ -32,7 +32,7 @@ public class User implements UserDetails {
             orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Product> productList = new ArrayList<>();
 
-    @ManyToMany( cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany( cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "usersList")
     private List<Chat> chat ;
 
 
